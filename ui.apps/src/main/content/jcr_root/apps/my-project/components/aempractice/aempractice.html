@@ -1,0 +1,33 @@
+<div data-sly-use.model="com.myproject.core.models.impl.AemPracticeModelImpl"></div>
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html"
+     data-sly-call="${clientlib.css @ categories='aempractice.site'}"/>
+
+<div class="aem-practice"
+     data-sly-set.back="url(${model.imagePath})"
+     data-sly-set.img="background-image: ${model.isBackground ? back : 'none'}"
+     style="${img @ context='styleString'}">
+
+    <h2>${model.title}</h2>
+    <div data-sly-list="${model.navigationItems}">
+        <sly data-sly-test="${itemList.first}">
+            <b>Title: ${item.title}</b><br>
+            <b>Path: ${item.path}</b>
+        </sly>
+        <sly data-sly-test="${!itemList.first && !itemList.last}">
+            <span>Title: ${item.title}</span><br>
+            <span>Path: ${item.path}</span>
+        </sly>
+        <sly data-sly-test="${itemList.last}">
+            <i>Title: ${item.title}</i><br>
+            <i>Path: ${item.path}</i>
+        </sly>
+        <br>
+    </div>
+
+    <div data-sly-test="${wcmmode.edit}">
+        <p>Author mode</p>
+    </div>
+
+    <p>Current page title: ${currentPage.title}</p>
+    <p>Current page path: ${currentPage.path}</p>
+</div>
